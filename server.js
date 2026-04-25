@@ -19,8 +19,11 @@ const app = express();
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors({
-  origin: 'http://localhost:3000', 
-  credentials: true               
+  origin: [
+    "http://localhost:3000",
+    "https://sms-frontend-5632.onrender.com"
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
