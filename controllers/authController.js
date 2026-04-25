@@ -21,7 +21,6 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-  
     if (user.status !== "accepted") {
       return res.status(403).json({
         message:
@@ -40,14 +39,14 @@ const loginUser = async (req, res) => {
         role: "user",
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 1000, 
+      secure: true,
+      sameSite: "none",
+      maxAge: 60 * 60 * 1000,
     });
 
     res.status(200).json({
